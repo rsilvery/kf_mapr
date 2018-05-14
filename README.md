@@ -1,11 +1,11 @@
 # Steps:
 
--1. Create namespace and enable volume plugin:
+### Create namespace and enable volume plugin:
  "kubectl create -f mapr_config.yaml"
--2. Install KSonnet:
+### Install KSonnet:
 wget https://github.com/ksonnet/ksonnet/releases/download/v0.10.2/ks_0.10.2_linux_amd64.tar.gz
 tar -xzvf ks_0.10.2_linux_amd64.tar.gz 
--3. Run create kubeflow app: 
+### Run create kubeflow app: 
 
 cd ks_0.10.2_linux_amd64
 ./ks init kubeflow-demo
