@@ -29,4 +29,12 @@ cd kubeflow-demo/
 ### Set Jupyter notebook directory for persistent notebooks (assuming "/user/mapr/jupyter" in MapR-FS)
 ../ks param set kubeflow-core jupyterNotebookPVCMount /mapr/jupyter
 
-### Visit Jupyter hub on port 8000 on your K8s cluster
+### Visit Jupyter hub on port 8000 on your K8s cluster - PVC is not working.
+
+### Serve a model using TF serving
+../ks generate tf-serving serveInception --name=inception
+../ks param set serveInception modelPath gs://kubeflow-models/inception
+
+
+too many bugs for now.
+
