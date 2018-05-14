@@ -49,3 +49,20 @@ spec:
       securityType: "secure"
       ticketSecretName: "secret-kf"
       ticketSecretNamespace: "demo-kf"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kf-forwarder
+  namespace: demo-kf
+  labels:
+    run: tf-hub
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    name: jupyterhub
+  externalIPs:
+  - <external IP of K8s host/cluster>
+  selector:
+    app: tf-hub

@@ -4,7 +4,9 @@
  "kubectl create -f mapr_config.yaml"
 ### Install KSonnet:
 wget https://github.com/ksonnet/ksonnet/releases/download/v0.10.2/ks_0.10.2_linux_amd64.tar.gz
+
 tar -xzvf ks_0.10.2_linux_amd64.tar.gz 
+
 ### Run create kubeflow app: 
 
 cd ks_0.10.2_linux_amd64
@@ -23,3 +25,8 @@ cd kubeflow-demo/
 
 ### Deploy Kubeflow
 ../ks apply default -c kubeflow-core
+
+### Set Jupyter notebook directory for persistent notebooks (assuming "/user/mapr/jupyter" in MapR-FS)
+../ks param set kubeflow-core jupyterNotebookPVCMount /mapr/jupyter
+
+### Visit Jupyter hub on port 8000 on your K8s cluster
