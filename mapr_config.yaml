@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-kf
+  labels:
+    name: demo-kf
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-kf
+  namespace: demo-kf
+type: Opaque
+data:
+  CONTAINER_TICKET: <base64 encoded ticket>
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-kf
+  namespace: demo-kf
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5G
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-kf
+  namespace: demo-kf
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: demo-kf
+    name: pvc-kf
+  flexVolume:
+    driver: "mapr.com/maprfs"
+    options:
+      platinum: "false"
+      cluster: "<cluster name>"
+      cldbHosts: "<CLDB hosts>"
+      volumePath: "/user/mapr"
+      securityType: "secure"
+      ticketSecretName: "secret-kf"
+      ticketSecretNamespace: "demo-kf"
