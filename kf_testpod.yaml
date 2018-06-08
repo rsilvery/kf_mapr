@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kftestpod
+  name: kfcentospod
   namespace: demo-kf
 spec:
   containers:
@@ -21,4 +21,4 @@ spec:
   volumes:
     - name: maprvolume
       persistentVolumeClaim:
-        claimName: pvc-kf
+        claimName: kfpvc
