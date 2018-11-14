@@ -22,7 +22,7 @@ Installing the MapR Volume Driver allows you to create persistent volumes that m
   * *kubectl create -f kdf-provisioner.yaml*
 
 
-### Create namespace, secret, and volume claims
+### Create namespace, secret, and data access
 These are the initial steps needed to configure data cluster access for KubeFlow
 * Create a Namespace for Kubeflow: *kubectl create ns kubeflow*
 * Create Secret for cluster access (see /kf-secret.yaml):
@@ -36,7 +36,9 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 * Create Persistent Volume Claim (PVC) to bind to this claim (using /kf-pvc.yaml)
   * *kubectl create -f kf-pvc.yaml* 
 
-  
+ If you want to test that this worked, you can use the /kf-testpod.yaml to generate a Centos pod with this mount.
+
+
 
 
 
