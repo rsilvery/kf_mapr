@@ -7,7 +7,8 @@ I did this on a single AWS t2.2xlarge instance with the following initial config
 * Swap off
 
 
-# Install MapR Volume Driver
+### Install MapR Volume Driver
+Installing the MapR Volume Driver allows you to create persistent volumes that map to volumes in your MapR filespace.
 * Download the most recent version of the following files to your directory on your K8s master node from [here](http://package.mapr.com/tools/KubernetesDataFabric/):
   * kdf-namespace.yaml
   * kdf-rbac.yaml
@@ -19,6 +20,16 @@ I did this on a single AWS t2.2xlarge instance with the following initial config
   * kubectl create -f kdf-rbac.yaml
   * kubectl create -f kdf-plugin-centos.yaml
   * kubectl create -f kdf-provisioner.yaml
+
+
+### Create namespace and volume claims
+These are the initial steps needed to configure data cluster access for KubeFlow
+* Create a namespace for Kubeflow: kubectl create ns kubeflow
+* Create secret for cluster access (see /kf-secret.yaml):
+  * Get long lived service ticket from a MapR cluster. Can follow steps [here](https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html)
+  * Base64 encode this ticket. You can use a webtool like [this](https://www.base64encode.org/)
+  * Insert encoded ticket string into /kf-secret.yaml 
+  * Create secret: kubectl create -f kf-secret.yaml
 
 
 
