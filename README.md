@@ -14,22 +14,22 @@ Installing the MapR Volume Driver allows you to create persistent volumes that m
   * kdf-rbac.yaml
   * kdf-plugin-centos.yaml
   * kdf-provisioner.yaml
-* Change host IP (labeled: changeme!) in kdf-plugin-centos.yaml to your Master host IP (can get with “hostname --ip-address”
+* Change host IP (labeled: *changeme!*) in kdf-plugin-centos.yaml to your Master host IP (can get with *hostname --ip-address*
 * Create the following resources as shown:
-  * kubectl create -f kdf-namespace.yaml
-  * kubectl create -f kdf-rbac.yaml
-  * kubectl create -f kdf-plugin-centos.yaml
-  * kubectl create -f kdf-provisioner.yaml
+  * *kubectl create -f kdf-namespace.yaml*
+  * *kubectl create -f kdf-rbac.yaml*
+  * *kubectl create -f kdf-plugin-centos.yaml*
+  * *kubectl create -f kdf-provisioner.yaml*
 
 
 ### Create namespace and volume claims
 These are the initial steps needed to configure data cluster access for KubeFlow
-* Create a namespace for Kubeflow: kubectl create ns kubeflow
+* Create a namespace for Kubeflow: *kubectl create ns kubeflow*
 * Create secret for cluster access (see /kf-secret.yaml):
   * Get long lived service ticket from a MapR cluster. Can follow steps [here](https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html)
   * Base64 encode this ticket. You can use a webtool like [this](https://www.base64encode.org/)
   * Insert encoded ticket string into /kf-secret.yaml 
-  * Create secret: kubectl create -f kf-secret.yaml
+  * Create secret: *kubectl create -f kf-secret.yaml*
 
 
 
