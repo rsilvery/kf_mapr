@@ -46,7 +46,19 @@ These are the initial steps needed to configure data cluster access for KubeFlow
     * *wget https://github.com/ksonnet/ksonnet/releases/download/v0.13.0/ks_0.13.0_linux_amd64.tar.gz*
     * *tar xzf ks_0.13.0_linux_amd64.tar.gz*
   * Create symbolic link in /usr/local/bin: *sudo ln -s ~/ks_0.13.0_linux_amd64/ks /usr/local/bin/ks*
-  * Set permissions: *chmod +x /usr/local/bin/ks*
+
+
+### Install KubeFlow 
+* Set Environment Variables
+  * *export KUBEFLOW_VERSION=0.3.1*
+  * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
+  * *export NAMESPACE=kubeflow
+* Create KubeFlow directory and download components to it
+  * *mkdir kubeflow*
+  * *curl -L -o kubeflow/kubeflow.tar.gz https://github.com/kubeflow/kubeflow/archive/${KUBEFLOW_TAG}.tar.gz*
+  * *tar -xzvf kubeflow/kubeflow.tar.gz -C kubeflow/*
+
+
 
 
 
