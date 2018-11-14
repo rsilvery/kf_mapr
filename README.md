@@ -33,7 +33,10 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 * Create Persistent Volume (PV) to provision storage in the cluster
   * Edit /kf-pv.yaml and enter your cluster info where indicated under "options"
   * *kubectl create -f kf-pv.yaml*
+* Create Persistent Volume Claim (PVC) to bind to this claim (using /kf-pvc.yaml)
+  * *kubectl create -f kf-pvc.yaml* 
 
+  
 
 
 
