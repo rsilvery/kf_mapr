@@ -52,7 +52,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 * Set Environment Variables
   * *export KUBEFLOW_VERSION=0.3.1*
   * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
-  * *export NAMESPACE=kubeflow
+  * *export NAMESPACE=kubeflow*
 * Create KubeFlow directory and download components to it
   * *mkdir kubeflow*
   * *curl -L -o kubeflow/kubeflow.tar.gz https://github.com/kubeflow/kubeflow/archive/${KUBEFLOW_TAG}.tar.gz*
