@@ -16,7 +16,7 @@ spec:
         memory: "2Gi"
         cpu: "500m"
     volumeMounts:
-    - mountPath: /opt
+    - mountPath: /mapr
       name: maprvolume
   volumes:
     - name: maprvolume
