@@ -4,6 +4,7 @@ I did this on a single AWS t2.2xlarge instance with the following initial config
 * Kubenetes v1.12.2
 * KubeFlow 0.3.1
 * Docker v1.13.1
+* KSonnet 0.13.0
 * SELinux and IPTables disabled
 * Swap off
 
@@ -40,6 +41,12 @@ These are the initial steps needed to configure data cluster access for KubeFlow
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
 ### Install KubeFlow dependencies
+* KSonnet ([directions](kf-testpod.yaml))
+  * Download and extract KSonnet. 
+    * *wget https://github.com/ksonnet/ksonnet/releases/download/v0.13.0/ks_0.13.0_linux_amd64.tar.gz*
+    * *tar xzf ks_0.13.0_linux_amd64.tar.gz*
+  * Create symbolic link in /usr/local/bin: *sudo ln -s ~/ks_0.13.0_linux_amd64/ks /usr/local/bin/ks*
+  * Set permissions: *chmod +x /usr/local/bin/ks*
 
 
 
