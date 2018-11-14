@@ -9,10 +9,10 @@ I did this on a single AWS t2.2xlarge instance with the following initial config
 
 # Install MapR Volume Driver
 * Download the most recent version of the following files to your directory on your K8s master node from [here](http://package.mapr.com/tools/KubernetesDataFabric/):
- * kdf-namespace.yaml
- * kdf-rbac.yaml
- * kdf-plugin-centos.yaml
- * kdf-provisioner.yaml
+  * kdf-namespace.yaml
+  * kdf-rbac.yaml
+  * kdf-plugin-centos.yaml
+  * kdf-provisioner.yaml
 * Change host IP (labeled: changeme!) in kdf-plugin-centos.yaml to your Master host IP (can get with “hostname --ip-address”
 * Create the following resources as shown:
   * kubectl create -f kdf-namespace.yaml
