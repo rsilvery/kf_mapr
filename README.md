@@ -2,6 +2,7 @@
 ### Config: 
 I did this on a single AWS t2.2xlarge instance with the following initial config:
 * Kubenetes v1.12.2
+* KubeFlow 0.3.1
 * Docker v1.13.1
 * SELinux and IPTables disabled
 * Swap off
@@ -14,7 +15,7 @@ Installing the MapR Volume Driver allows you to create persistent volumes that m
   * kdf-rbac.yaml
   * kdf-plugin-centos.yaml
   * kdf-provisioner.yaml
-* Change host IP (labeled: *changeme!*) in kdf-plugin-centos.yaml to your Master host IP (can get with *hostname --ip-address*
+* Change host IP (labeled: *changeme!*) in kdf-plugin-centos.yaml to your Master host IP (can get with *hostname --ip-address*)
 * Create the following resources as shown:
   * *kubectl create -f kdf-namespace.yaml*
   * *kubectl create -f kdf-rbac.yaml*
@@ -38,6 +39,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
+### Install KubeFlow dependencies
 
 
 
