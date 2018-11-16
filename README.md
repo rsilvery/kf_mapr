@@ -60,7 +60,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *export K8S_NAMESPACE=kubeflow*
   * *export KUBEFLOW_REPO=/home/centos/kubeflow/kubeflow-$KUBEFLOW_VERSION* (or whatever you'd like)
   * *export KUBEFLOW_KS_DIR=/home/centos/kubeflow/ks_app*
-  * *export DEPLOYMENT_NAME=kubeflowexport DEPLOYMENT_NAME=kubeflow* 
+  * *export DEPLOYMENT_NAME=kubeflow* 
 * Create KubeFlow directory and download components to it
   * *mkdir kubeflow*
   * *cd kubeflow*
@@ -72,6 +72,8 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *cd $KUBEFLOW_KS_DIR*
   * *ks registry add kubeflow $KUBEFLOW_REPO/kubeflow*
   * *ks env set default --namespace $K8S_NAMESPACE*
+
+  ... to be continued
 
 
 
