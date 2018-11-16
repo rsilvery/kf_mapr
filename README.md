@@ -41,22 +41,37 @@ These are the initial steps needed to configure data cluster access for KubeFlow
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
 ### Install KubeFlow dependencies
-* KSonnet ([directions](kf-testpod.yaml))
-  * Download and extract KSonnet. 
-    * *wget https://github.com/ksonnet/ksonnet/releases/download/v0.13.0/ks_0.13.0_linux_amd64.tar.gz*
-    * *tar xzf ks_0.13.0_linux_amd64.tar.gz*
-  * Create symbolic link in /usr/local/bin: *sudo ln -s ~/ks_0.13.0_linux_amd64/ks /usr/local/bin/ks*
+* KSonnet: has to be built manually with a version of Go newer than 1.9  [JIRA](https://github.com/kubeflow/kubeflow/issues/1929)
+  * Install Go (example)
+    * *wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz*
+    * *sudo tar -C /usr/local -xzf go1.11.2.linux-amd64.tar.gz*
+    * *export PATH=$PATH:/usr/local/go/bin*
+  * Install KSonnet
+    * *go get github.com/ksonnet/ksonnet*
+    * *cd go/src/github.com/ksonnet/ksonnet/*
+    * *make install*
+    * Create symbolic link in /usr/local/bin: *sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks*
 
 
 ### Install KubeFlow 
-* Set Environment Variables
+* Set Environment Variables using whatever method you prefer
   * *export KUBEFLOW_VERSION=0.3.1*
   * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
-  * *export NAMESPACE=kubeflow*
+  * *export K8S_NAMESPACE=kubeflow*
+  * *export KUBEFLOW_REPO=/home/centos/kubeflow/kubeflow-$KUBEFLOW_VERSION* (or whatever you'd like)
+  * *export KUBEFLOW_KS_DIR=/home/centos/kubeflow/ks_app*
+  * *export DEPLOYMENT_NAME=kubeflowexport DEPLOYMENT_NAME=kubeflow* 
 * Create KubeFlow directory and download components to it
   * *mkdir kubeflow*
+  * *cd kubeflow*
   * *curl -L -o kubeflow/kubeflow.tar.gz https://github.com/kubeflow/kubeflow/archive/${KUBEFLOW_TAG}.tar.gz*
-  * *tar -xzvf kubeflow/kubeflow.tar.gz -C kubeflow/*
+  * *tar -xzvf kubeflow/kubeflow.tar.gz*
+* Initialize KubeFlow apps directory for KSonnet
+  * *ks init ks_app*
+* Configure KSonnet for KubeFlow
+  * *cd $KUBEFLOW_KS_DIR*
+  * *ks registry add kubeflow $KUBEFLOW_REPO/kubeflow*
+  * *ks env set default --namespace $K8S_NAMESPACE*
 
 
 
