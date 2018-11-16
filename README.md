@@ -41,7 +41,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
 ### Install KubeFlow dependencies
-* KSonnet: has to be built manually with a version of Go newer than 1.9  [JIRA](https://github.com/kubeflow/kubeflow/issues/1929)
+* KSonnet: has to be built manually with a version of Go newer than 1.9  ([JIRA])(https://github.com/kubeflow/kubeflow/issues/1929)
   * Install Go (example)
     * *wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz*
     * *sudo tar -C /usr/local -xzf go1.11.2.linux-amd64.tar.gz*
@@ -51,6 +51,11 @@ These are the initial steps needed to configure data cluster access for KubeFlow
     * *cd go/src/github.com/ksonnet/ksonnet/*
     * *make install*
     * Create symbolic link in /usr/local/bin: *sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks*
+* Helm: needed to support Seldon dashboard
+  * *curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh*
+  * *chmod a+x get_helm.sh*
+  * *./get_helm.sh*
+
 
 
 ### Install KubeFlow 
@@ -72,6 +77,17 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *cd $KUBEFLOW_KS_DIR*
   * *ks registry add kubeflow $KUBEFLOW_REPO/kubeflow*
   * *ks env set default --namespace $K8S_NAMESPACE*
+
+
+  ### Install KubeFlow components
+  * Run this to see what packages are available for install "*ks pkg list*"
+  * Install the packages you want (I'm just picking based on a standard use case): 
+    * *ks pkg install kubeflow/core*
+    * *ks pkg install kubeflow/argo*
+    * *ks pkg install kubeflow/tf-serving*
+    * *ks pkg install kubeflow/seldon*
+
+
 
   ... to be continued
 
