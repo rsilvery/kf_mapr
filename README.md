@@ -46,9 +46,10 @@ These are the initial steps needed to configure data cluster access for KubeFlow
     * *wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz*
     * *sudo tar -C /usr/local -xzf go1.11.2.linux-amd64.tar.gz*
     * *export PATH=$PATH:/usr/local/go/bin*
+    * *export GOPATH=/home/centos/go(whereever you want to pull the KSonnet source)*
   * Install KSonnet
     * *go get github.com/ksonnet/ksonnet*
-    * *cd go/src/github.com/ksonnet/ksonnet/*
+    * *cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)*
     * *make install*
     * Create symbolic link in /usr/local/bin: *sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks*
 * Helm: needed to support Seldon dashboard
