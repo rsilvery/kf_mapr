@@ -6,7 +6,7 @@ I did this on a single AWS t2.2xlarge instance with the following initial config
 * Docker v1.13.1
 * KSonnet 0.13.0
 * SELinux and IPTables disabled
-* Swap off
+* Swap disabled
 
 
 ### Install MapR Volume Driver
@@ -55,7 +55,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh*
   * *chmod a+x get_helm.sh*
   * *./get_helm.sh*
-
+  * *helm init* (to install Tiller)
 
 
 ### Install KubeFlow 
@@ -65,7 +65,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *export K8S_NAMESPACE=kubeflow*
   * *export KUBEFLOW_REPO=/home/centos/kubeflow/kubeflow-$KUBEFLOW_VERSION* (or whatever you'd like)
   * *export KUBEFLOW_KS_DIR=/home/centos/kubeflow/ks_app*
-  * *export DEPLOYMENT_NAME=kubeflow* 
+  * *export K8S_NAMESPACE=kubeflow* 
 * Create KubeFlow directory and download components to it
   * *mkdir kubeflow*
   * *cd kubeflow*
@@ -79,13 +79,31 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *ks env set default --namespace $K8S_NAMESPACE*
 
 
-  ### Install KubeFlow components
-  * Run this to see what packages are available for install "*ks pkg list*"
-  * Install the packages you want (I'm just picking based on a standard use case): 
-    * *ks pkg install kubeflow/core*
-    * *ks pkg install kubeflow/argo*
-    * *ks pkg install kubeflow/tf-serving*
-    * *ks pkg install kubeflow/seldon*
+### Install & Configuere KubeFlow components
+* Run this command to see what packages are available in the repo for install "*ks pkg list*"
+* Install the packages you want (I'm just picking based on a standard use case): 
+  * *ks pkg install kubeflow/core*
+  * *ks pkg install kubeflow/argo*
+  * *ks pkg install kubeflow/tf-serving*
+  * *ks pkg install kubeflow/seldon*
+  * *ks pkg install kubeflow/examples*
+* Generate Kube manifests for installed components:
+  * *ks generate ambassador ambassador*
+  * *ks generate jupyterhub jupyterhub --namespace $K8S_NAMESPACE*
+  * *ks generate centraldashboard centraldashboard*
+  * *ks generate tf-job-operator tf-job-operator --namespace $K8S_NAMESPACE*
+  * *ks generate argo argo --namespace $K8S_NAMESPACE*
+  * *ks generate seldon seldon --namespace $K8S_NAMESPACE*
+* Configure components
+  * *Set RBAC for Argo scheduler: *kubectl create clusterrolebinding default-admin2 --clusterrole=cluster-admin --serviceaccount=kubeflow:default*
+  * *Install Seldon Core Analytics: *helm install seldon-core-analytics --name seldon-core-analytics --set grafana_prom_admin_password=password --set persistence.enabled=false --repo https://storage.googleapis.com/seldon-charts --namespace $K8S_NAMESPACE*
+* Configure environment for deployment
+  * *ks env add cloud*
+  * *Set Kube Context: *kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE*
+  * *ks env set cloud --namespace $K8S_NAMESPACE* 
+* Deploy components: *ks apply cloud*
+
+
 
 
 
