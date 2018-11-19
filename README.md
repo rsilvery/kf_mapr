@@ -95,8 +95,8 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * *ks generate argo argo --namespace $K8S_NAMESPACE*
   * *ks generate seldon seldon --namespace $K8S_NAMESPACE*
 * Configure components
-  * *Set RBAC for Argo scheduler: *kubectl create clusterrolebinding default-admin2 --clusterrole=cluster-admin --serviceaccount=kubeflow:default*
-  * *Install Seldon Core Analytics: *helm install seldon-core-analytics --name seldon-core-analytics --set grafana_prom_admin_password=password --set persistence.enabled=false --repo https://storage.googleapis.com/seldon-charts --namespace $K8S_NAMESPACE*
+  * Set RBAC for Argo scheduler: *kubectl create clusterrolebinding default-admin2 --clusterrole=cluster-admin --serviceaccount=kubeflow:default*
+  * Install Seldon Core Analytics: *helm install seldon-core-analytics --name seldon-core-analytics --set grafana_prom_admin_password=password --set persistence.enabled=false --repo https://storage.googleapis.com/seldon-charts --namespace $K8S_NAMESPACE*
 * Configure environment for deployment
   * *ks env add cloud*
   * *Set Kube Context: *kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE*
