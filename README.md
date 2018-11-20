@@ -2,7 +2,7 @@
 ### Config: 
 I did this on a single AWS t2.2xlarge instance with the following initial config:
 * Kubenetes v1.12.2
-* KubeFlow 0.3.1
+* KubeFlow 0.3.3
 * Docker v1.13.1
 * KSonnet 0.13.0
 * SELinux and IPTables disabled
@@ -18,11 +18,12 @@ Installing the MapR Volume Driver allows you to create persistent volumes that m
   * kdf-provisioner.yaml
 * Change host IP (labeled: *changeme!*) in kdf-plugin-centos.yaml to your Master host IP (can get with *hostname --ip-address*)
 * Create the following resources as shown:
-  * *kubectl create -f kdf-namespace.yaml*
-  * *kubectl create -f kdf-rbac.yaml*
-  * *kubectl create -f kdf-plugin-centos.yaml*
-  * *kubectl create -f kdf-provisioner.yaml*
-
+  ```
+  kubectl create -f kdf-namespace.yaml
+  kubectl create -f kdf-rbac.yaml
+  kubectl create -f kdf-plugin-centos.yaml
+  kubectl create -f kdf-provisioner.yaml
+  ```
 
 ### Configure namespace, secret, and data access
 These are the initial steps needed to configure data cluster access for KubeFlow
@@ -34,25 +35,33 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   * Create secret: *kubectl create -f kf-secret.yaml*
 * Create Persistent Volume (PV) to provision storage in the cluster
   * Edit [kf-pv.yaml](kf-pv.yaml) and enter your cluster info where indicated under "options"
-  * *kubectl create -f kf-pv.yaml*
+  ```
+  kubectl create -f kf-pv.yaml
+  ```
 * Create Persistent Volume Claim (PVC) to bind to this claim (using [kf-pvc.yaml](kf-pvc.yaml))
-  * *kubectl create -f kf-pvc.yaml* 
+  ```
+  kubectl create -f kf-pvc.yaml
+  ``` 
 
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
 ### Install KubeFlow dependencies
 * KSonnet: has to be built manually with a version of Go newer than 1.9  ([JIRA])(https://github.com/kubeflow/kubeflow/issues/1929)
   * Install Go (example)
-    * *wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz*
-    * *sudo tar -C /usr/local -xzf go1.11.2.linux-amd64.tar.gz*
-    * *export PATH=$PATH:/usr/local/go/bin*
-    * *export GOPATH=/home/centos/go(whereever you want to pull the KSonnet source)*
+  ```
+     wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz
+     sudo tar -C /usr/local -xzf go1.11.2.linux-amd64.tar.gz
+     export PATH=$PATH:/usr/local/go/bin
+     export GOPATH=/home/centos/go(whereever you want to pull the KSonnet source)
+  ```
   * Install KSonnet
-    * *sudo yum -y install git*
-    * *go get github.com/ksonnet/ksonnet*
-    * *cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)*
-    * *make install*
-    * Create symbolic link in /usr/local/bin: *sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks*
+  ```
+     sudo yum -y install git
+     go get github.com/ksonnet/ksonnet
+     cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)
+     make install
+     Create symbolic link in /usr/local/bin: sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks
+```
 
 ### Install KubeFlow 
 * Set Environment Variables using whatever method you prefer
