@@ -79,19 +79,27 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash
   ```
 * Initialize KSonnet app 
-  * *cd $(dirname "${KUBEFLOW_KS_DIR}")
-  * *ks init $(basename "${KUBEFLOW_KS_DIR}")*
+  ```
+  cd $(dirname "${KUBEFLOW_KS_DIR}")
+  ks init $(basename "${KUBEFLOW_KS_DIR}")
+  ```
 * Add local KubeFlow registry
-  * *cd $KUBEFLOW_KS_DIR*
-  * *ks registry add kubeflow "${KUBEFLOW_REPO}"*
+  ```
+   cd $KUBEFLOW_KS_DIR
+   ks registry add kubeflow "${KUBEFLOW_REPO}"
+  ```
 * Set default namespace for KSonnet
-  * *ks env set default --namespace $K8S_NAMESPACE*
+  ```
+  ks env set default --namespace $K8S_NAMESPACE
+  ```
 * Install KubeFlow packages. Please see master list in KubeFlow [repo](https://github.com/kubeflow) for what's available. I'm just selecting the ones I prefer here. Run this command to see what packages are available in the repo for install "*ks pkg list*"
-  * *ks pkg install kubeflow/core*
-  * *ks pkg install kubeflow/argo*
-  * *ks pkg install kubeflow/tf-serving*
-  * *ks pkg install kubeflow/seldon*
-  * *ks pkg install kubeflow/examples*
+   ```
+   ks pkg install kubeflow/core
+   ks pkg install kubeflow/argo
+   ks pkg install kubeflow/tf-serving
+   ks pkg install kubeflow/seldon
+   ks pkg install kubeflow/examples
+   ```
 * Generate Kube manifests for kubeflow components:
   * *ks generate ambassador ambassador*
   * *ks generate jupyterhub jupyterhub --namespace ${K8S_NAMESPACE}*
