@@ -101,18 +101,24 @@ These are the initial steps needed to configure data cluster access for KubeFlow
    ks pkg install kubeflow/examples
    ```
 * Generate Kube manifests for kubeflow components:
-  * *ks generate ambassador ambassador*
-  * *ks generate jupyterhub jupyterhub --namespace ${K8S_NAMESPACE}*
-  * *ks generate centraldashboard centraldashboard*
-  * *ks generate tf-job-operator tf-job-operator --namespace ${K8S_NAMESPACE}*
-  * *ks generate argo argo --namespace ${K8S_NAMESPACE}*
-  * *ks generate seldon seldon --namespace ${K8S_NAMESPACE}*
+  ```
+   ks generate ambassador ambassador
+   ks generate jupyterhub jupyterhub --namespace ${K8S_NAMESPACE}
+   ks generate centraldashboard centraldashboard
+   ks generate tf-job-operator tf-job-operator --namespace ${K8S_NAMESPACE}
+   ks generate argo argo --namespace ${K8S_NAMESPACE}
+   ks generate seldon seldon --namespace ${K8S_NAMESPACE}
+   ```
 * Configure KS environment for deployment
-  * *ks env add cloud*
-  * *ks env set cloud --namespace ${K8S_NAMESPACE}*
-  * Set Kube Context: *kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE*
+   ```
+   ks env add cloud
+   ks env set cloud --namespace ${K8S_NAMESPACE}
+   Set Kube Context: kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE
+   ```
 * Deploy Ksonnet app
-  * *ks apply cloud*
+  ```
+  ks apply cloud
+  ```
 
 
   ... to be continued
