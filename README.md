@@ -48,64 +48,50 @@ These are the initial steps needed to configure data cluster access for KubeFlow
     * *export PATH=$PATH:/usr/local/go/bin*
     * *export GOPATH=/home/centos/go(whereever you want to pull the KSonnet source)*
   * Install KSonnet
+    * *sudo yum -y install git*
     * *go get github.com/ksonnet/ksonnet*
     * *cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)*
     * *make install*
     * Create symbolic link in /usr/local/bin: *sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks*
-* Helm: needed to support Seldon dashboard
-  * *curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh*
-  * *chmod a+x get_helm.sh*
-  * *./get_helm.sh*
-  * *helm init* (to install Tiller)
-
 
 ### Install KubeFlow 
 * Set Environment Variables using whatever method you prefer
-  * *export KUBEFLOW_VERSION=0.3.1*
-  * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
   * *export K8S_NAMESPACE=kubeflow*
-  * *export KUBEFLOW_REPO=/home/centos/kubeflow/kubeflow-$KUBEFLOW_VERSION* (or whatever you'd like)
-  * *export KUBEFLOW_KS_DIR=/home/centos/kubeflow/ks_app*
-  * *export K8S_NAMESPACE=kubeflow* 
-* Create KubeFlow directory and download components to it
-  * *mkdir kubeflow*
-  * *cd kubeflow*
-  * *curl -L -o kubeflow/kubeflow.tar.gz https://github.com/kubeflow/kubeflow/archive/${KUBEFLOW_TAG}.tar.gz*
-  * *tar -xzvf kubeflow/kubeflow.tar.gz*
-* Initialize KubeFlow apps directory for KSonnet
-  * *ks init ks_app*
-* Configure KSonnet for KubeFlow
+  * *export DEPLOYMENT_NAME=kubeflow*
+  * *export KUBEFLOW_VERSION=0.3.3*
+  * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
+  * *export KUBEFLOW_DEPLOY=true*
+  * *export KUBEFLOW_REPO=`pwd`/kubeflow/*
+  * *export KUBEFLOW_KS_DIR=`pwd`/${DEPLOYMENT_NAME}_ks_app*
+* Create KubeFlow directory and clone repo from GitHub
+  * *curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash*
+* Initialize KSonnet app 
+  * *cd $(dirname "${KUBEFLOW_KS_DIR}")
+  * *ks init $(basename "${KUBEFLOW_KS_DIR}")*
+* Add local KubeFlow registry
   * *cd $KUBEFLOW_KS_DIR*
-  * *ks registry add kubeflow $KUBEFLOW_REPO/kubeflow*
+  * *ks registry add kubeflow "${KUBEFLOW_REPO}"*
+* Set default namespace for KSonnet
   * *ks env set default --namespace $K8S_NAMESPACE*
-
-
-### Install & Configuere KubeFlow components
-* Run this command to see what packages are available in the repo for install "*ks pkg list*"
-* Install the packages you want (I'm just picking based on a standard use case): 
+* Install KubeFlow packages. Please see master list in KubeFlow [repo](https://github.com/kubeflow) for what's available. I'm just selecting the ones I prefer here. Run this command to see what packages are available in the repo for install "*ks pkg list*"
   * *ks pkg install kubeflow/core*
   * *ks pkg install kubeflow/argo*
   * *ks pkg install kubeflow/tf-serving*
   * *ks pkg install kubeflow/seldon*
   * *ks pkg install kubeflow/examples*
-* Generate Kube manifests for installed components:
+* Generate Kube manifests for kubeflow components:
   * *ks generate ambassador ambassador*
-  * *ks generate jupyterhub jupyterhub --namespace $K8S_NAMESPACE*
+  * *ks generate jupyterhub jupyterhub --namespace ${K8S_NAMESPACE}*
   * *ks generate centraldashboard centraldashboard*
-  * *ks generate tf-job-operator tf-job-operator --namespace $K8S_NAMESPACE*
-  * *ks generate argo argo --namespace $K8S_NAMESPACE*
-  * *ks generate seldon seldon --namespace $K8S_NAMESPACE*
-* Configure components
-  * Set RBAC for Argo scheduler: *kubectl create clusterrolebinding default-admin2 --clusterrole=cluster-admin --serviceaccount=kubeflow:default*
-  * Install Seldon Core Analytics: *helm install seldon-core-analytics --name seldon-core-analytics --set grafana_prom_admin_password=password --set persistence.enabled=false --repo https://storage.googleapis.com/seldon-charts --namespace $K8S_NAMESPACE*
-* Configure environment for deployment
+  * *ks generate tf-job-operator tf-job-operator --namespace ${K8S_NAMESPACE}*
+  * *ks generate argo argo --namespace ${K8S_NAMESPACE}*
+  * *ks generate seldon seldon --namespace ${K8S_NAMESPACE}*
+* Configure KS environment for deployment
   * *ks env add cloud*
-  * *Set Kube Context: *kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE*
-  * *ks env set cloud --namespace $K8S_NAMESPACE* 
-* Deploy components: *ks apply cloud*
-
-
-
+  * *ks env set cloud --namespace ${K8S_NAMESPACE}*
+  * Set Kube Context: *kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE*
+* Deploy Ksonnet app
+  * *ks apply cloud*
 
 
   ... to be continued
