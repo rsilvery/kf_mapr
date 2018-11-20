@@ -61,19 +61,23 @@ These are the initial steps needed to configure data cluster access for KubeFlow
      cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)
      make install
      Create symbolic link in /usr/local/bin: sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks
-```
+  ```
 
 ### Install KubeFlow 
 * Set Environment Variables using whatever method you prefer
-  * *export K8S_NAMESPACE=kubeflow*
-  * *export DEPLOYMENT_NAME=kubeflow*
-  * *export KUBEFLOW_VERSION=0.3.3*
-  * *export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}*
-  * *export KUBEFLOW_DEPLOY=true*
-  * *export KUBEFLOW_REPO=`pwd`/kubeflow/*
-  * *export KUBEFLOW_KS_DIR=`pwd`/${DEPLOYMENT_NAME}_ks_app*
+  ```
+   export K8S_NAMESPACE=kubeflow
+   export DEPLOYMENT_NAME=kubeflow
+   export KUBEFLOW_VERSION=0.3.3
+   export KUBEFLOW_TAG=v${KUBEFLOW_VERSION}
+   export KUBEFLOW_DEPLOY=true
+   export KUBEFLOW_REPO=`pwd`/kubeflow/
+   export KUBEFLOW_KS_DIR=`pwd`/${DEPLOYMENT_NAME}_ks_app
+   ```
 * Create KubeFlow directory and clone repo from GitHub
-  * *curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash*
+  ```
+  curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash
+  ```
 * Initialize KSonnet app 
   * *cd $(dirname "${KUBEFLOW_KS_DIR}")
   * *ks init $(basename "${KUBEFLOW_KS_DIR}")*
