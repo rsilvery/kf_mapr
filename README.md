@@ -39,7 +39,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   ```
   kubectl create -f kf-secret.yaml
   ```
-* Create Persistent Volume (PV) to provision storage in the cluster
+* Create Persistent Volume (PV) to provision storage in the cluster for personal applications
   * Edit [kf-pv.yaml](kf-pv.yaml) and enter your cluster info where indicated under "options"
   ```
   kubectl create -f kf-pv.yaml
@@ -48,6 +48,10 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   ```
   kubectl create -f kf-pvc.yaml
   ``` 
+* Edit [claim-admin-pv.yaml](claim-admin-pv.yaml) and enter your cluster info where indicated under "options" to create a Persistent Volume claim for JupyterHub. 
+  ```
+  kubectl create -f claim-admin-pv.yaml
+  ```
 
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
@@ -132,9 +136,9 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 If you're on AWS, then you need to do some port mapping in order to have the external IP route to the internal node IP. 
 * JupyterHub
   * Download and edit [jupyter-svc.yaml](jupyter-svc.yaml) by changing the external IP to match your configuration and deploy service.
-  ```
-  kubectl create -f jupyter-svc.yaml
-  ```
+    ```
+    kubectl create -f jupyter-svc.yaml
+    ```
 
 
 

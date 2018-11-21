@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: claim-admin-pv
+  namespace: kubeflow
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: kubeflow
+    name: claim-admin
+  flexVolume:
+    driver: "mapr.com/maprfs"
+    options:
+      platinum: "false"
+      cluster: "my.cluster.com"
+      cldbHosts: "172.24.11.94 172.24.8.64 172.24.10.185"
+      volumePath: "/user/mapr/kubeflow"
+      securityType: "secure"
+      ticketSecretName: "kf-secret"
+      ticketSecretNamespace: "kubeflow"
