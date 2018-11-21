@@ -13,4 +13,4 @@ spec:
   externalIPs:
   - <External Host IP>
   selector:
-    app: tf-hub
+    app: argo-ui
