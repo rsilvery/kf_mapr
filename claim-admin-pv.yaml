@@ -15,9 +15,9 @@ spec:
     driver: "mapr.com/maprfs"
     options:
       platinum: "false"
-      cluster: "my.cluster.com"
-      cldbHosts: "172.24.11.94 172.24.8.64 172.24.10.185"
-      volumePath: "/user/mapr/kubeflow"
+      cluster: "[CLUSTER NAME: ex. my.cluster.com]"
+      cldbHosts: "[CLDB hosts]"
+      volumePath: "[Path to mnt: ex. /user/mapr/]"
       securityType: "secure"
       ticketSecretName: "kf-secret"
       ticketSecretNamespace: "kubeflow"
