@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-svc
+  namespace: kubeflow
+  labels:
+    app: tf-hub
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    name: grafana
+  externalIPs:
+  - <External Host IP>
+  selector:
+    app: tf-hub

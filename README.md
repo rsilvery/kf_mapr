@@ -66,8 +66,10 @@ These are the initial steps needed to configure data cluster access for KubeFlow
      go get github.com/ksonnet/ksonnet
      cd /home/centos/go/src/github.com/ksonnet/ksonnet (or your dir)
      make install
-     Create symbolic link in /usr/local/bin: sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks
+     sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks
+     cd ~
   ```
+
 
 ### Install KubeFlow 
 * Set Environment Variables using whatever method you prefer
@@ -98,7 +100,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   ```
   ks env set default --namespace $K8S_NAMESPACE
   ```
-* Install KubeFlow packages. Please see master list in KubeFlow [repo](https://github.com/kubeflow) for what's available. I'm just selecting the ones I prefer here. Run this command to see what packages are available in the repo for install "*ks pkg list*"
+* Install KubeFlow packages. Please see master list in KubeFlow [repo](https://github.com/kubeflow) for what's available or run this command: "*ks pkg list*"
    ```
    ks pkg install kubeflow/core
    ks pkg install kubeflow/argo
@@ -119,12 +121,21 @@ These are the initial steps needed to configure data cluster access for KubeFlow
    ```
    ks env add cloud
    ks env set cloud --namespace ${K8S_NAMESPACE}
-   Set Kube Context: kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE
+   kubectl config set-context $(kubectl config current-context) --namespace=$K8S_NAMESPACE
    ```
 * Deploy Ksonnet app
   ```
   ks apply cloud
   ```
+
+### Provide Ingress to UIs
+If you're on AWS, then you need to do some port mapping in order to have the external IP route to the internal node IP. 
+* JupyterHub
+  ** Download and edit [jupyter-svc.yaml] by changing the external IP to match your configuration and deploy service.
+  ```
+  kubectl create -f jupyter-svc.yaml
+  ```
+
 
 
   ... to be continued
