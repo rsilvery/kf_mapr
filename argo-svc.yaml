@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: jupyter-svc
+  name: argo-svc
   namespace: kubeflow
   labels:
-    app: tf-hub
+    app: argo-ui
 spec:
   ports:
-  - port: 8000
+  - port: 8001
     protocol: TCP
-    name: jupyterhub
+    name: argo-ui
   externalIPs:
   - <External Host IP>
   selector:

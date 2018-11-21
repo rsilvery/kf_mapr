@@ -143,6 +143,11 @@ If you're on AWS, then you need to do some port mapping in order to have the ext
     ```
     kubectl create -f jupyter-svc.yaml
     ```
+* Argo
+  * Download and edit [argo-svc.yaml](argo-svc.yaml) by changing the external IP to match your configuration and deploy service.
+    ```
+    kubectl create -f argo-svc.yaml
+    ```
 
 
 
