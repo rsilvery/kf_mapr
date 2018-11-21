@@ -77,6 +77,19 @@ These are the initial steps needed to configure data cluster access for KubeFlow
      sudo ln -s /home/centos/go/bin/ks /usr/local/bin/ks
      cd ~
   ```
+  * Install Seldon monitoring dashboard (Prometheus+Grafana)
+    * Install Helm
+    ```
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+    chmod a+x get_helm.sh 
+    ./get_helm.sh
+    helm init
+
+    ```
+    * Install Seldon Core Anayltics using Helm
+    ```
+    helm install seldon-core-analytics --name seldon-core-analytics --set grafana_prom_admin_password=password --set persistence.enabled=false --repo https://storage.googleapis.com/seldon-charts --namespace kubeflow
+    ```
 
 
 ### Install KubeFlow 
@@ -147,6 +160,11 @@ If you're on AWS, then you need to do some port mapping in order to have the ext
   * Download and edit [argo-svc.yaml](argo-svc.yaml) by changing the external IP to match your configuration and deploy service.
     ```
     kubectl create -f argo-svc.yaml
+    ```
+* Grafana (for Seldon Core Analytics)
+  * Download and edit [seldon-svc.yaml](seldon-svc.yaml) by changing the external IP to match your configuration and deploy service.
+    ```
+    kubectl create -f seldon-svc.yaml
     ```
 
 
