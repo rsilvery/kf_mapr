@@ -52,6 +52,10 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   ```
   kubectl create -f claim-admin-pv.yaml
   ```
+* Create Persistent Volume Claim (PVC) for JupyterHub (using [claim-admin-pvc.yaml](claim-admin-pvc.yaml))
+  ```
+  kubectl create -f claim-admin-pvc.yaml
+  ```
 
  If you want to test that this worked, you can use the [kf-testpod.yaml](kf-testpod.yaml) to generate a Centos pod with this mount.
 
