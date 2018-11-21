@@ -131,7 +131,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
 ### Provide Ingress to UIs
 If you're on AWS, then you need to do some port mapping in order to have the external IP route to the internal node IP. 
 * JupyterHub
-  ** Download and edit [jupyter-svc.yaml] by changing the external IP to match your configuration and deploy service.
+  * Download and edit [jupyter-svc.yaml](jupyter-svc.yaml) by changing the external IP to match your configuration and deploy service.
   ```
   kubectl create -f jupyter-svc.yaml
   ```
