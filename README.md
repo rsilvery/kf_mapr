@@ -178,7 +178,7 @@ This demo is to train and serve a TensorFlow MNIST model. Training is done in th
   * Note that the mount point is under */home/jovyan* so if your directory was mounted as *training_data* it will be /home/jovyan/training_data*
 * Run training job 
 
-
+...to be continued.
 
 
 
