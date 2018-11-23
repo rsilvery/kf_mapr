@@ -175,7 +175,7 @@ This demo is to train and serve a TensorFlow MNIST model. Training is done in th
 * Launch Jupyter instance with TensorFlow from JupyterHub (located on port 8000)
 * Open [mnist.ipynb](mnist.ipynb) notebook 
 * Set your training_data and model_output directories to the correct location in the MapR filesystem.
-  * Note that the mount point is under */home/jovyan* so if your directory was mounted as *training_data* it will be /home/jovyan/training_data*
+  * Note that the mount point is under */home/jovyan* so if your directory was mounted as *training_data* it will be */home/jovyan/training_data*
 * Run training job 
 
 ...to be continued.
