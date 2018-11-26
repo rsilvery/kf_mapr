@@ -162,7 +162,7 @@ If you're on AWS, then you need to do some port mapping in order to have the ext
     kubectl create -f argo-svc.yaml
     ```
 * Grafana (for Seldon Core Analytics)
-  * Download and edit [seldon-svc.yaml](seldon-svc.yaml) by changing the external IP to match your configuration and deploy service.
+  * Download and edit [grafana-svc.yaml](seldon-svc.yaml) by changing the external IP to match your configuration and deploy service.
     ```
     kubectl create -f seldon-svc.yaml
     ```
@@ -184,7 +184,11 @@ This demo is to train and serve a TensorFlow MNIST model. Training is done in th
   ```
   kubectl create -f serve_mnist.yaml
   ```
-  This uses the mount point from the kf-pvc Persistent Volume which must point to the directory in MapR-FS which contains the model and model executable code (model.py)
+  This uses the mount point from the kf-pvc Persistent Volume which must point to the directory in MapR-FS which contains the model and model executable code (model.py).
+
+### Test Model
+* 
+
 
 
 
