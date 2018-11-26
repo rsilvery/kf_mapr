@@ -20,11 +20,11 @@
                         "containers": [
                             {
                                 "image": "seldonio/deepmnistclassifier_runtime:0.2",
-                                "imagePullPolicy": "IfNotPresent",
+                                "imagePullPolicy": "Always",
                                 "name": "mnist-model",
                                 "volumeMounts": [
                                     {
-                                        "mountPath": "/models",
+                                        "mountPath": "/data",
                                         "name": "persistent-storage"
                                     }
                                 ]
