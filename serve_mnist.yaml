@@ -1,5 +1,5 @@
 {
-    "apiVersion": "machinelearning.seldon.io/v1alpha1",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
     "kind": "SeldonDeployment",
     "metadata": {
         "labels": {
@@ -15,15 +15,12 @@
         "name": "mnist-model",
         "predictors": [
             {
-                "annotations": {
-                    "predictor_version": "v1"
-                },
-                "componentSpec": {
+                "componentSpecs": [{
                     "spec": {
                         "containers": [
                             {
                                 "image": "seldonio/deepmnistclassifier_runtime:0.2",
-                                "imagePullPolicy": "Always",
+                                "imagePullPolicy": "IfNotPresent",
                                 "name": "mnist-model",
                                 "volumeMounts": [
                                     {
@@ -45,7 +42,7 @@
                             }
                         ]
                     }
-                },
+                }],
                 "graph": {
                     "children": [],
                     "endpoint": {
