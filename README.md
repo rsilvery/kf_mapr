@@ -39,7 +39,7 @@ These are the initial steps needed to configure data cluster access for KubeFlow
   ```
   kubectl create -f kf-secret.yaml
   ```
-* Create Persistent Volume (PV) to provision storage in the cluster for personal applications
+* Create Persistent Volume (PV) to provision storage in the cluster for personal applications. Point to models directory for this example:
   * Edit [kf-pv.yaml](kf-pv.yaml) and enter your cluster info where indicated under "options"
   ```
   kubectl create -f kf-pv.yaml
@@ -177,6 +177,17 @@ This demo is to train and serve a TensorFlow MNIST model. Training is done in th
 * Set your training_data and model_output directories to the correct location in the MapR filesystem.
   * Note that the mount point is under */home/jovyan* so if your directory was mounted as *training_data* it will be */home/jovyan/training_data*
 * Run training job 
+
+### Serve Model
+* Copy [model.py](model.py) executable code to the same directory as your model: (ex. /user/mapr/kubeflow/models/mnist)
+* Run Kubectl with [serve_mnist.yaml](serve_mnist.yaml)
+  ```
+  kubectl create -f serve_mnist.yaml
+  ```
+  This uses the mount point from the kf-pvc Persistent Volume which must point to the directory in MapR-FS which contains the model and model executable code (model.py)
+
+
+
 
 ...to be continued.
 
