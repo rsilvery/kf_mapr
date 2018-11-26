@@ -37,15 +37,14 @@
                         "volumes": [
                             {
                                 "name": "persistent-storage",
-				"volumeSource" : {
+				                "volumeSource" : {
                                     "persistentVolumeClaim": {
-					"claimName": "kf-pvc"
-
+    					            "claimName": "kf-pvc"
                                     }
-				}
+				                }
                             }
                         ]
-                     }
+                    }
                 },
                 "graph": {
                     "children": [],
