@@ -7,7 +7,7 @@ metadata:
     run: deep-mnist-webapp
 spec:
   ports:
-  - port: 8123
+  - port: 9000
     protocol: TCP
     name: 
   externalIPs:
